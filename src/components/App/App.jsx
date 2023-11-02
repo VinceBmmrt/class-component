@@ -4,6 +4,7 @@ import { Component } from 'react';
 import logo from '../../assets/logo.svg';
 
 import './App.scss';
+import Counter, { CounterHook } from '../Counter/Counter';
 // function App => class App extends Component
 class App extends Component {
   // Pour avoir des données d'état, state...
@@ -73,6 +74,9 @@ class App extends Component {
           <button type="button" onClick={this.handleClickCounter}>
             {counter}
           </button>
+
+          {counter % 2 === 0 && <Counter incrementValue={counter} />}
+          <CounterHook incrementValue={counter} />
         </header>
       </div>
     );
