@@ -3,7 +3,6 @@ import { Component } from 'react';
 import logo from '../../assets/logo.svg';
 
 import './App.scss';
-
 // function App => class App extends Component
 class App extends Component {
   // Pour avoir des données d'état, state...
@@ -19,6 +18,17 @@ class App extends Component {
     this.state = {
       counter: 0,
     };
+
+    // Je bind la méthode handleClickCounter à la classe App
+    // Je vais fixer le this à ma méthode handleClickCounter
+    // Toutes les fonctions que l'on utiliser dans nos eventListener, il FAUT les binder
+    // Il faut fixer la valeur du this pour qu'il ne la perde pas
+    this.handleClickCounter = this.handleClickCounter.bind(this);
+  }
+
+  handleClickCounter() {
+    const { counter } = this.state;
+    this.setState({ counter: counter + 1 });
   }
 
   // Au lieu de retourner directement le jsx
@@ -28,7 +38,11 @@ class App extends Component {
     const { counter } = this.state;
     return (
       <div className="App">
-        <header className="App-header">{counter}</header>
+        <header className="App-header">
+          <button type="button" onClick={this.handleClickCounter}>
+            {counter}
+          </button>
+        </header>
       </div>
     );
   }
